@@ -19,7 +19,17 @@ export class AlbumService {
   }
 
   getAlbumById(albumId: number){
-    return this.database.object('albums/' + albumId);
+    return this.database.object('/albums/' + albumId);
+  }
+
+  updateAlbum(localUpdatedAlbum){
+    var albumEntry = this.getAlbumById(localUpdatedAlbum.$key);
+    albumEntry.update({title: localUpdatedAlbum.title, artist: localUpdatedAlbum.artist, description: localUpdatedAlbum.description});
+  }
+
+  deleteAlbum(localAlbum){
+    var albumEntry = this.getAlbumById(localAlbum.$key);
+    albumEntry.remove();
   }
 
 }
